@@ -32,5 +32,7 @@ export default {
   color: #2c3e50;
   display: flex;
   flex-direction: column;
+  background-color: #020d18;
+  height: 100vh;
 }
 </style>

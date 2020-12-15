@@ -1,5 +1,6 @@
 
-import Home from '../components/Home.vue'
+import Home from '../components/Home.vue';
+import MovieDetails from "../components/MovieDetails.vue"
 
 
 export default{
@@ -9,6 +10,10 @@ export default{
        path:'/',
        component:Home
      
+      },
+      {
+        path:'/movie/:id',
+        component:MovieDetails
       }
     ],
    

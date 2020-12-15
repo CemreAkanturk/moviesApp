@@ -3,11 +3,30 @@ import service from '../services/service'
 
 
 const state={
-movies:[]
+movies:[],
+movieDetails:{},
 
 };
 
-const getters={};
+const getters={
+
+
+   setNewMovies(state){
+    
+    var date = new Date();
+    var lastWeekYear = date.getFullYear();
+
+    var lastWeekDisplay = "01-01-" + lastWeekYear;
+
+     return state.movies.filter(item => new Date(item.releaseDate)>=new Date(lastWeekDisplay)) 
+
+   
+
+   },
+  
+     
+
+};
 
 const mutations={
 
@@ -17,19 +36,36 @@ const mutations={
 
      
 
+    },
+
+
+    setMovieDetails(state,details){
+
+           state.movieDetails=details;
     }
 };
 
 const actions={
 
- fetchMovies(context){
-   
-   return service.fetchMovies().then(obj => {
-        context.commit('setMovies',obj.data)
-    })
- }
+        fetchMovies(context){
+          
+          return service.fetchMovies().then(obj => {
+                context.commit('setMovies',obj.data)
+            
+            })
+        },
+
+        fetchMovieDetail(context,moviesid){
+          
+          return service.fetchMovieDetails(moviesid).then(obj => {
+              context.commit('setMovieDetails',obj.data)
+            
+          })
+        }
 
 };
+
+
 
 
 export default {
@@ -37,6 +73,7 @@ export default {
 state,
 getters,
 mutations,
-actions
+actions,
+
 
 }
