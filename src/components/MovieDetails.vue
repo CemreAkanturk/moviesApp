@@ -20,7 +20,7 @@
           <p class="Head">{{movieDetails.title}}</p>
 
           <div class="rating">
-              
+               
               <div class="flexRow">
                   <img src="../assets/img/starRating.png">
                   <p>{{movieDetails.imdbRating}}/10</p>
@@ -29,12 +29,17 @@
            
             <div class="flexRow">
                 <p>Rate This Movie:</p>
-               <div v-for="item in parseInt(movieDetails.imdbRating)" :key="item.id">
-                        <img src="../assets/img/starRating.png">
-               </div>
+
+              
+                        <div  v-for="item in 10-this.Star" :key="item.id">
+                            <img src="../assets/img/starRating.png">
+                     </div>
+
+          
+               
                <div v-for="item in this.Star" :key="item.id">
                         <img src="../assets/img/starWhite.png">
-               </div>
+               </div> 
 
             </div>
                
@@ -120,12 +125,21 @@ export default {
 
         Star(){
 
-           return 10-parseInt(this.movieDetails.imdbRating)
+           var puan=0;
+
+           if(this.movieDetails.imdbRating){
+                 
+               puan=this.movieDetails.imdbRating
+               
+           }
+
+         
+           return 10-parseInt(puan)
 
         },
 
       ...mapState([
-           'movieDetails',
+           'movieDetails'
        ]),
        
     },
@@ -139,13 +153,12 @@ export default {
     created(){
        
       this.$store.dispatch('fetchMovieDetail',this.movieId);
-
+     
 
 
     },
     mounted(){
         
-      
       
 
     },

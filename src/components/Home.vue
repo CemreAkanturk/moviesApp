@@ -6,7 +6,7 @@
             <div class="slider">
        
         <div class="container">
-             <p class="Baslik">Bu yıl gosterime girenler</p>
+             <p class="Baslik">Movies released this year</p>
 
               <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
  
@@ -32,7 +32,7 @@
 
                                  
                               <div class="row">
-                                  <p class="movieName"><img class="icon" src="../assets/img/starRating.png">{{movie.imdbRating}}/10</p>
+                                  <p class="movieName"><img class="icon" src="../assets/img/starRating.png"> {{movie.imdbRating}}/10</p>
                                   <router-link class="route" :to="'/movie/'+movie.id">Read More ></router-link>
                                   
                               </div> 
@@ -97,8 +97,9 @@
 
     </div>
 
-  </div>
-
+             </div>
+       
+        <movieList></movieList>
 
             </div>
 
@@ -112,17 +113,19 @@
 import { mapState } from 'vuex';
 import { mapGetters} from 'vuex';
 import Loader from './loader'
+import movieList from './moviesList'
 
 export default {
     
     name:'HomeComp',
     components:{
-        Loader
+        Loader,
+        movieList,
     },
     computed:{
 
        ...mapState([
-           'movies',
+           
             'NewMovies'
        ]),
 
@@ -149,11 +152,11 @@ export default {
             
         });
 
+
       
 
     },
     mounted(){
-
 
     },
     methods: {
@@ -255,8 +258,12 @@ export default {
 
 
     .icon{
-
-         margin:0px 5px 5px 5px ;
+       
+         margin:-23px -30px -15px 10px ;
+         width:50px;
+         position: relative;
+   
+    
     }
 .container{
     background-color: rgba(0, 0, 0, 0.281);
@@ -268,7 +275,7 @@ export default {
 .slider{
 
     width: 100%;
-    height: 75%;
+    height: 65vh;
     display: flex;
     flex-direction: column;
     align-items: center;

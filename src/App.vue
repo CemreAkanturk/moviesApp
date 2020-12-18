@@ -33,6 +33,7 @@ export default {
   display: flex;
   flex-direction: column;
   background-color: #020d18;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
 }
 </style>

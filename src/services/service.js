@@ -22,10 +22,29 @@ import axios from 'axios'
         responseType: 'json',
         headers: {
           'Accept': 'application/json',
+          'Content-Type': 'application/json;;charset=Shift_JIS',
+        }
+      })
+    },
+
+
+      async fetchMovieTime(){
+
+        return await axios.get("http://localhost:3000/movieTimes",  {
+        responseType: 'json',
+        headers: {
+          'Accept': 'application/json',
           'Content-Type': 'application/json',
         }
       });
 
-    }
+
+
+        },
+
+
+      }
+
     
- }
+    
+ 
