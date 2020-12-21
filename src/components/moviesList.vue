@@ -3,30 +3,51 @@
         
           <div class="Search">
                      <p class="Baslik">Movies</p>
-                      {{moviesTime[0]}}
-                    <input class="SearchInput" v-model="searchVal" placeholder="Type to search">
+                   
+                    <input class="SearchInput" v-model.trim="searchVal" placeholder="Type to search" v-on:keyup="searchData">
                      <img class="icon" src="../assets/img/search.png">
                     
 
              </div>
 
           <div class="movies">
+                      
+                            <div class="movie" v-for="item in  searchData.slice(Slice-10,Slice)" :key="item.id">
+                                                        <img class="movieposter" :src="item.posterurl" >
+                                                        <div class="details">
+                                                                <div class="row">
+                                                                    <p class="genres" v-for="item in item.genres" :key="item.id"> {{item}}</p>
+                                                                </div>
+                                                                <p class="Head">{{item.title}}</p> 
+                                                                <p class="">{{item.storyline}}</p> 
+                                                                
+                                                                
+                                                                <div class="Time">
+                                                                        <p style="margin:1%"><img src="../assets/img/time.png"> VIEWING TIMES</p>
+                                                                        <div v-if="moviesTime[item.id]">
+                                                                            <p class="times" v-for="time in moviesTime[item.id].times" :key="time"> {{time}}</p>
+                                                                        </div>
+                                                                        <div v-else>
+                                                                            <p style="margin-top:8%">There is no session for this movie. </p>
+                                                                        </div>
+                                                                    
+                                                                        <router-link class="getTicket " :to="'/movie/'+item.id">Get Ticket <img src="../assets/img/next.png"></router-link>
+                                                                </div>
+                                                                
+                                                                
+                                                        </div>
 
-                       <div class="movie" v-for="item in movies.slice(Slice-10,Slice)" :key="item.id">
-                              <img class="movieposter" :src="item.posterurl" >
-                               <div class="details">
-                                    <div class="row">
-                                        <p class="genres" v-for="item in item.genres" :key="item.id"> {{item}}</p>
-                                    </div>
-                                       <p class="Head">{{item.title}}</p> 
-                                       <p class="">{{item.storyline}}</p> 
-                                       <router-link class="getTicket " :to="'/movie/'+item.id">Get Ticket <img src="../assets/img/next.png"></router-link>
+                                                        
 
-                               </div>
+                                                </div>
 
+                       
+                        <div v-if="searchData.length==0" >
+                             
+                              <p>No movie found with your search.</p>
                             
-
-                       </div>
+                        </div>
+                    
  
                   
                 <paginate
@@ -76,6 +97,7 @@ export default {
         });
 
        this.$store.dispatch('fetchMovieTime');
+
      
 
 
@@ -95,21 +117,33 @@ export default {
 
        toplamPage(){
 
-           return parseInt(this.setMoviesCount/10)+1
+           return parseInt(this.searchData.length/10)+1
        },
 
        Slice(){
  
               return this.pageNumber*10
-       }
+       },
 
+
+       searchData() {
+ 
+           if(this.searchVal === '') {
+               return this.movies
+               }
+            return this.movies.filter(movie => {
+                return movie.title.toLowerCase().includes(this.searchVal.toLowerCase())
+            }) 
+       
+        }
     },
    methods: {
     clickCallback: function(pageNum) {
       this.pageNumber=pageNum
-    },
-
+    },    
   
+    
+   
 
     
   },
@@ -146,6 +180,18 @@ export default {
      border:1px solid #dcf836;
  }
  
+
+.Time{
+
+     width: 100%;
+     display: flex;
+     align-items: center;
+     font-size:10px;
+     font-weight: bold;
+
+
+}
+
  .icon {
    padding: 15px;
    color: #dcf836;
@@ -161,12 +207,28 @@ export default {
 
 }
 
+.times{
+    
+    background-color: rgba(73, 71, 71, 0.144);
+    font-size: 14px;
+    display: inline-block;
+    margin: 5px;
+    padding: 7px 10px;
+    letter-spacing: 0; 
+    color: #717171;
+    border-radius: 5px;
+    border:1px solid #dde8f865;
+    font-weight: 500;
+
+}
+
 .Search{
     width: 60%;
     display:flex;
     margin: auto;
     justify-content: space-between;
     border-bottom:1px solid #405266;
+    
 }
 
 .Baslik{
@@ -243,7 +305,7 @@ a{
      width: 80%;
      display:flex;
      flex-direction: column;
-     justify-content: flex-start;
+     justify-content: center;
      align-items: flex-start;
      /* border:1px solid red */
  }
@@ -273,11 +335,12 @@ a{
         }
 
         .getTicket{
-            width: 12%;
+            width: 15%;
             background-color: rgb(54, 114, 54);
             color:white;
             border-radius: 10px;
             padding:5px;
-            margin-left:80%
+            margin-left:auto;
+            font-size:14px;
         }
 </style>

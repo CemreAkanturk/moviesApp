@@ -25,11 +25,7 @@ const getters={
 
    },
 
-   setMoviesCount(state){
-
-     return state.movies.length;
-
-   }
+  
   
      
 
