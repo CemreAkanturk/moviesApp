@@ -1,6 +1,8 @@
 
 import Home from '../components/Home.vue';
 import MovieDetails from "../components/MovieDetails.vue"
+import GetTicket from "../components/GetTicket.vue"
+
 
 
 export default{
@@ -14,6 +16,10 @@ export default{
       {
         path:'/movie/:id',
         component:MovieDetails
+      },
+      {
+        path:'/movie/getTicket/:id',
+        component:GetTicket
       }
     ],
    

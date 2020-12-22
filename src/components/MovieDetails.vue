@@ -1,4 +1,5 @@
 <template>
+<div id="movieDetail">
     <div class="movieDetails">
         
        <div >
@@ -58,11 +59,7 @@
 
                             </div>
 
-                            <h4>Tickets</h4>
-                            <div class="tickets">
-                                  Ogrenci
-
-                            </div>
+                           
 
 
                 </div>
@@ -95,7 +92,8 @@
                     <h6>Average Rating:</h6>
                     {{movieDetails.averageRating}}
                     </div>
-
+                 
+                  <router-link class="getTicket " :to="'/movie/getTicket/'+movieDetails.id">Get Ticket <img src="../assets/img/next.png"></router-link>
 
                 </div>
                
@@ -105,6 +103,8 @@
         </div>
 
     </div>
+</div>
+    
 </template>
 
 <script>
@@ -173,13 +173,31 @@ export default {
 
 <style scoped>
 
+
+        #movieDetail{
+
+            background-image:url("../assets/img/sliderbg.jpg");
+            background-size: 100% 70%;
+            background-repeat: no-repeat;
+             height: 87vh;
+         
+        }
         
+
+        .getTicket{
+            width: 70%;
+            background-color: rgb(54, 114, 54);
+            color:white;
+            border-radius: 10px;
+            padding:5px;
+            margin:auto;
+            font-size:14px;
+        }
         .movieDetails{
             display: flex;
             justify-content: space-evenly;
             align-items: center;
             width: 70%;
-            height: 65%;
             margin:auto;
             margin-top:5%;
         }

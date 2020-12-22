@@ -4,17 +4,21 @@
     <appHeader></appHeader>
     
    <router-view></router-view>
+
+   <Footer></Footer>
     
   </div>
 </template>
 
 <script>
 import appHeader from './components/header'
+import Footer from './components/footer.vue'
 
 export default {
   name: 'App',
   components: {
-    appHeader
+    appHeader,
+    Footer
   }
 }
 </script>

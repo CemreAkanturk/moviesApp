@@ -2,7 +2,7 @@
     <div>
         
           <div class="Search">
-                     <p class="Baslik">Movies</p>
+                     <p class="Baslik">IN GENERES</p>
                    
                     <input class="SearchInput" v-model.trim="searchVal" placeholder="Type to search" v-on:keyup="searchData">
                      <img class="icon" src="../assets/img/search.png">
@@ -31,7 +31,7 @@
                                                                             <p style="margin-top:8%">There is no session for this movie. </p>
                                                                         </div>
                                                                     
-                                                                        <router-link class="getTicket " :to="'/movie/'+item.id">Get Ticket <img src="../assets/img/next.png"></router-link>
+                                                                        <router-link class="getTicket " :to="'/movie/getTicket/'+item.id">Get Ticket <img src="../assets/img/next.png"></router-link>
                                                                 </div>
                                                                 
                                                                 
@@ -84,8 +84,7 @@ export default {
             searchVal:"",
             PageCount:0,
             pageNumber:1,
-           
-
+            
         }
     },
     
@@ -232,7 +231,9 @@ export default {
 }
 
 .Baslik{
-    font-size: 30px;
+    font-size: 27
+    
+    px;
     color: #ffffff;
     line-height: 36px;
     font-family: 'Dosis', sans-serif;
@@ -254,7 +255,8 @@ export default {
 .pagination{
 
    float:right;
-   margin-top:5%
+   margin-bottom:5%;
+    margin-top:3%
 }
 
 a{
