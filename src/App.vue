@@ -13,6 +13,7 @@
 <script>
 import appHeader from './components/header'
 import Footer from './components/footer.vue'
+import 'vue-select/dist/vue-select.css';
 
 export default {
   name: 'App',
