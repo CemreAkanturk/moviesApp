@@ -6,12 +6,12 @@
     <div class="ticket">
 
 
-            <div class="TicketData">
+            <div class="TicketData" >
               <h4>Choose Ticket</h4>
         
 
                      <label :style="{ display: displayStyle }" class="place"><img src="../assets/img/seans.png"> Session</label>
-                    <select  class="select"  required @change="changeLocation" >
+                    <select  class="select"  required @change="changeLocation" v-model="option" >
                      <option value="cemre" disabled selected></option>
                      <option class="optionStyle" v-for="option in options" :key="option" :value="option">{{option}}</option>
                     </select>
@@ -90,23 +90,27 @@
                     
 
                </div>
-          
-
+            
           </div>
 
-           <div v-else >
+           <div v-else style="width:100%" >
+               
+
+               <Seat :seat="seatData"> </Seat>
 
           </div>
              
               
             </div>
-
+ 
   
          
 
     </div>
+    
 
     </div>
+
         
     </template>
 
@@ -116,11 +120,13 @@
     
 <script>
 import {mapState} from 'vuex'
+import Seat from '../components/seat'
 
 export default {
 
     
     components:{
+        Seat
     },
     computed:{
 
@@ -148,6 +154,23 @@ export default {
        total(){
 
            return this.ogrCount*this.ogrencibilet+this.tamCount*this.tambilet
+       },
+
+       seatData(){
+        
+        var seatdata={
+           
+                "tam":this.tamCount,
+                "ogrenci":this.ogrCount,
+                "Session":this.option,
+                "hall":this.moviesTime[this.movieId].hallId,
+                "movieid":this.movieId
+
+
+        }
+
+
+        return seatdata;
        }
 
        
@@ -176,7 +199,7 @@ export default {
 
     },
     mounted(){
-        
+         
 
     },
     methods: {
@@ -205,7 +228,16 @@ export default {
        },
 
        seat(){
-            this.seatControl=true
+
+           if(this.option==""){
+               alert("Lütfen seans seçiniz.")
+                
+           }else{
+                
+                this.seatControl=true
+
+           }
+          
        }
     
     

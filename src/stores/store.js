@@ -6,6 +6,8 @@ const state={
 movies:[],
 movieDetails:{},
 moviesTime:[],
+setHalls:{},
+ticketdata:{}
 
 };
 
@@ -51,7 +53,27 @@ const mutations={
     setMovieTimes(state,moviesTimes){
 
       state.moviesTime=moviesTimes;
-    }
+
+    },
+
+    setHalls(state,hallsData){
+
+      state.setHalls=hallsData;
+
+    },
+
+    soldTickets(state,TicketsData){
+
+      state.ticketdata=TicketsData;
+
+    },
+
+
+  
+
+    
+
+    
 };
 
 const actions={
@@ -79,7 +101,35 @@ const actions={
               context.commit('setMovieTimes',obj.data)
             
           })
+        },
+
+        fetchHalls(context,id){
+          
+          return service.fetchHalls(id).then(obj => {
+              context.commit('setHalls',obj.data)
+            
+          })
+        },
+
+
+        fetchsoldTickets(context,id){
+
+          return service.fetchsoldTickets(id).then(obj => {
+              context.commit('soldTickets',obj.data)
+            
+          })
+        },
+         
+
+        addTicket(){
+          
+          alert("cecece")
+          return service.addTickets()
+             
+            
         }
+
+        
 
 };
 
